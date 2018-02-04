@@ -6,7 +6,17 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"time"
+	"encoding/json"
 )
+
+type Todo struct {
+	Name string
+	Completed bool
+	Due time.Time
+}
+
+type Todos []Todo
 
 func main() {
 	router := mux.NewRouter().StrictSlash(true)
@@ -23,7 +33,13 @@ func Index(w http.ResponseWriter, r *http.Request) {
 }
 
 func TodoIndex(w http.ResponseWriter,r *http.Request)  {
-	fmt.Fprintln(w,"Todo Index!")
+
+	todos:=Todos{
+		Todo{Name:"Write Presentation"},
+		Todo{Name:"Host meetup"},
+	}
+
+	json.NewEncoder(w).Encode(todos)
 }
 
 func TodoShow(w http.ResponseWriter,r *http.Request)  {
