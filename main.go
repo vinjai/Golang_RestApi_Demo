@@ -11,9 +11,9 @@ import (
 )
 
 type Todo struct {
-	Name string
-	Completed bool
-	Due time.Time
+	Name      string    `json:"name"`
+	Completed bool      `json:"completed"`
+	Due       time.Time `json:"due"`
 }
 
 type Todos []Todo
@@ -32,18 +32,18 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "Welcome amigo!")
 }
 
-func TodoIndex(w http.ResponseWriter,r *http.Request)  {
+func TodoIndex(w http.ResponseWriter, r *http.Request) {
 
-	todos:=Todos{
-		Todo{Name:"Write Presentation"},
-		Todo{Name:"Host meetup"},
+	todos := Todos{
+		Todo{Name: "Write Presentation"},
+		Todo{Name: "Host meetup"},
 	}
 
 	json.NewEncoder(w).Encode(todos)
 }
 
-func TodoShow(w http.ResponseWriter,r *http.Request)  {
+func TodoShow(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	todoId := vars["todoId"]
-	fmt.Fprintln(w,"Todo Show: ",todoId)
+	fmt.Fprintln(w, "Todo Show: ", todoId)
 }
