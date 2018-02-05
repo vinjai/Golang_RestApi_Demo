@@ -16,6 +16,7 @@ func TodoIndex(w http.ResponseWriter, r *http.Request) {
 	todos := Todos{
 		Todo{Name: "Write Presentation"},
 		Todo{Name: "Host meetup"},
+		Todo{Name: "Bridge Session"},
 	}
 
 	if err := json.NewEncoder(w).Encode(todos); err != nil {
